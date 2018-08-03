@@ -33,7 +33,7 @@ void mainMenu() {
         else
             wattroff(w, A_STANDOUT);
         sprintf(item, "%-12s",  list[i]);
-        mvwprintw(w, i+1, 2, "%s", item);
+        mvwprintw(w, i + 1, 2, "%s", item);
     }
     wrefresh(w); 
  
@@ -54,11 +54,12 @@ void mainMenu() {
                             i++;
                             i = (i > 4) ? 0 : i;
                             break;
-            }
-            wattron( w, A_STANDOUT );
+                case KEY_ENTER:
+                            if(i == 3) break;            }
+            wattron(w, A_STANDOUT);
             sprintf(item, "%-12s",  list[i]);
-            mvwprintw( w, i+1, 2, "%s", item);
-            wattroff( w, A_STANDOUT );
+            mvwprintw(w, i+1, 2, "%s", item);
+            wattroff(w, A_STANDOUT);
     }
  
     delwin(w);
