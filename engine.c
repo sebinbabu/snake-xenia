@@ -49,14 +49,6 @@ void initGame(game *g, int r, int c) {
 	initFood(g->f, r, c);
 }
 
-void initScreen() {
-	initscr();
-    //cbreak();
-  	//noecho();
-  	nodelay(stdscr, TRUE);
-  	keypad(stdscr, TRUE);
-    refresh();
-}
 
 void updateBoard(game *g) {
 	board *b = g->b;

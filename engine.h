@@ -33,7 +33,6 @@ void initBoard(board *b, int r, int c);
 void initSnake(snake *s, int r, int c);
 void initFood(food *f, int r, int c);
 void initGame(game *g, int r, int c);
-void initScreen();
 void updateBoard(game *g);
 void displayBoard(game *g);
 int moveSnake(game *g, int m);
