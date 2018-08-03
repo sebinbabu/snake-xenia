@@ -12,12 +12,12 @@ libncursesw5-dev : Developer’s libraries for ncursesw
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. Open up your terminal after installing the prerequisites and put these commands.
 
-...
+```
 git clone https://github.com/sebinbabu/snake-xenia.git
 cd snake-xenia
 make
 ./snake
-...
+```
 
 ## Authors
 
