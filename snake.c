@@ -1,7 +1,7 @@
 #include <time.h>
 #include <unistd.h>
 #include <ncurses.h>
-#include "back.h"
+#include "engine.h"
 
 int main(void) {
 	initScreen();
@@ -22,7 +22,7 @@ int main(void) {
 		refresh();
 		key = getch();
 		if(moveSnake(&g, key) == 0) break;
-		usleep(100000);
+		usleep(300000);
 	}
 	nodelay(stdscr, FALSE);
 	printw("GAME OVER"); 

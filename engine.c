@@ -4,7 +4,7 @@
 #include <ncurses.h>
 #include <unistd.h>
 #include <time.h>
-#include "back.h"
+#include "engine.h"
 
 node* createNode(int r, int c, char f, node *next) {
 	node *t = (node*) malloc(sizeof(node));

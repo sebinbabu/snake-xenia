@@ -1,5 +1,5 @@
-#ifndef BACK_H
-#define BACK_H
+#ifndef ENGINE_H
+#define ENGINE_H
 
 typedef struct NODE {
 	int x, y;
