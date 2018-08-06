@@ -105,26 +105,25 @@ int moveSnake(game *g, int m) {
 	nx = (r + (nx % r)) % r;
 	ny = h->y + oy;
 	ny = (c + (ny % c)) % c;
-	
-	if(b->b[nx][ny] == '#') return 0;
 
-	if(s->last_x != nx || s->last_y != ny) {
-		s->last_x = h->x, s->last_y = h->y;
-		h->f = '#';
-		h->next = createNode(nx, ny, '@', NULL);;
-		s->h = h->next;
-		if(nx == f->x && ny == f->y) {
-			while(1) {
-				initFood(f, r, c);
-				if(b->b[f->x][f->y] == ' ') 
-					break;
-			}
+	if(s->last_x == nx && s->last_y == ny) return -1;	
+	if(b->b[nx][ny] == '#') return 0;
+	
+	s->last_x = h->x, s->last_y = h->y;
+	h->f = '#';
+	h->next = createNode(nx, ny, '@', NULL);;
+	s->h = h->next;
+	if(nx == f->x && ny == f->y) {
+		while(1) {
+			initFood(f, r, c);
+			if(b->b[f->x][f->y] == ' ') 
+				break;
 		}
-		else {
-			s->t = t->next;
-			s->t->f = 'o';
-			free(t);
-		}
+	}
+	else {
+		s->t = t->next;
+		s->t->f = 'o';
+		free(t);
 	}
 	return 1;
 }

@@ -7,7 +7,7 @@
 int main(void) {
 //	mainMenu();
 	initScreen();
-	int r = 10, c = 15, key;
+	int r = 10, c = 15, key, status = -1;
     board b;
 	snake s;
 	food f;
@@ -21,9 +21,10 @@ int main(void) {
 		updateBoard(&g);
 		displayBoard(&g);
 		refresh();
+		if(status != -1) usleep(250000);
 		key = getch();
-		if(moveSnake(&g, key) == 0) break;
-		usleep(250000);
+		status = moveSnake(&g, key);
+		if(status == 0) break;
 	}
 
 	nodelay(stdscr, FALSE);
