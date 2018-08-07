@@ -170,7 +170,7 @@ obstacle* createObstacle(int r, int c, char f, obstacle *next) {
 }
 
 void setupObstacle(game *g) {
-	int r, c; board *b = g->b;
+	int r, c; board *b = g->b; b->r = 10;
 	srand(time(0));
 	while(1) {
 		r = (rand() % (10 - 1)) + 1;
