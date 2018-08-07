@@ -49,13 +49,16 @@ void initGame(game *g, int r, int c, int speed) {
 	initFood(g->f, r, c);
 	g->score = 0;
 	g->speed = speed;
+	g->o = NULL:
 }
+
 
 
 void updateBoard(game *g) {
 	board *b = g->b;
 	snake *s = g->s;
 	food *f = g->f;
+	obstacle *o = g->o;
 
 	memset((char*) b->b, ' ', 10000);
 	
@@ -63,6 +66,15 @@ void updateBoard(game *g) {
 	while(t != NULL) {
 		b->b[t->x][t->y] = t->f;
 		t = t->next;
+	}
+
+	while(o != NULL) {
+		t = o->h;
+		while(t != NULL) {
+			b->b[t->x][t->y] = t->f;
+			t = t->next;
+		}
+		o = o->next;
 	}
 
 	b->b[f->x][f->y] = f->f;
@@ -119,7 +131,7 @@ int moveSnake(game *g, int m) {
 	if(nx == f->x && ny == f->y) {
 		
 		g->score++;
-		if(g->speed > 60000) 
+		if(g->speed > 55000) 
 			g->speed -= 10000; 
 
 		while(1) {
@@ -134,6 +146,25 @@ int moveSnake(game *g, int m) {
 		free(t);
 	}
 	return 1;
+}
+
+obstacle* createObstacle(int r, int c, char f, obstacle *next) {
+	node *t = createNode(r - 1, c + 1, '+', NULL);
+	t = createNode(r, c + 1, '+', t);
+	t = createNode(r + 1, c + 1, '+', t);
+	t = createNode(r + 1, c, '+', t);
+	t = createNode(r + 1, c - 1, '+', t);
+	t = createNode(r, c - 1, '+', t);
+	t = createNode(r - 1, c - 1, '+', t);
+	t = createNode(r - 1, c, '+', t);
+
+	// + + +
+	// +   + creates this obstacle
+	// + + +
+	
+	obstacle *o = (obstacle*) malloc(sizeof(obstacle));
+	o->h = t;
+	o->next = next;
 }
 
 void pauseGame(game *g) {
