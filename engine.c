@@ -47,6 +47,8 @@ void initGame(game *g, int r, int c) {
 	// 		break;
 	// }
 	initFood(g->f, r, c);
+	g->score = 0;
+	g->speed = 250000;
 }
 
 
@@ -83,6 +85,7 @@ void displayBoard(game *g) {
 	}
 	for(i = 0; i < b->c + 2; i++) addch('-');
 	addch('\n');
+	printw("SCORE: %d", g->score);
 }
 
 int moveSnake(game *g, int m) {
@@ -114,6 +117,11 @@ int moveSnake(game *g, int m) {
 	h->next = createNode(nx, ny, '@', NULL);;
 	s->h = h->next;
 	if(nx == f->x && ny == f->y) {
+		
+		g->score++;
+		if(g->speed > 60000 && g->score / 5 > (g->score - 1) / 5) 
+			g->speed -= 50000; 
+
 		while(1) {
 			initFood(f, r, c);
 			if(b->b[f->x][f->y] == ' ') 
@@ -126,5 +134,9 @@ int moveSnake(game *g, int m) {
 		free(t);
 	}
 	return 1;
+}
+
+void pauseGame(game *g) {
+	usleep(g->speed);
 }
 

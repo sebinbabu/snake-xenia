@@ -21,16 +21,20 @@ int main(void) {
 		updateBoard(&g);
 		displayBoard(&g);
 		refresh();
-		if(status != -1) usleep(250000);
+		if(status != -1)
+			pauseGame(&g);
 		key = getch();
 		status = moveSnake(&g, key);
-		if(status == 0) break;
+		if(status == 0)
+			break;
 	}
 
 	nodelay(stdscr, FALSE);
-	printw("GAME OVER"); 
+	printw("\nGAME OVER\nPress q to Quit"); 
 	refresh();
-	getch();
+	
+	key = getch();
+	while(key != 'q') key = getch();
 	endwin();
     return 0;
 }
