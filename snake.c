@@ -11,9 +11,9 @@ int main(void) {
     board b;
 	snake s;
 	food f;
-    game g = {&s, &b, &f, speed};
+    game g = {&s, &b, &f};
 
-    initGame(&g, r, c);
+    initGame(&g, r, c, speed);
 	refresh();
 
 	while(1) {

@@ -38,7 +38,7 @@ void initFood(food *f, int r, int c) {
 	f->f = 'x';
 }
 
-void initGame(game *g, int r, int c) {
+void initGame(game *g, int r, int c, int speed) {
 	initSnake(g->s, r, c);
 	initBoard(g->b, r, c);
 	// while(1) {
@@ -48,7 +48,7 @@ void initGame(game *g, int r, int c) {
 	// }
 	initFood(g->f, r, c);
 	g->score = 0;
-	g->speed = 250000;
+	g->speed = speed;
 }
 
 
