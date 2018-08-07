@@ -49,7 +49,7 @@ void initGame(game *g, int r, int c, int speed) {
 	initFood(g->f, r, c);
 	g->score = 0;
 	g->speed = speed;
-	g->o = NULL:
+	g->o = NULL;
 }
 
 
@@ -139,6 +139,8 @@ int moveSnake(game *g, int m) {
 			if(b->b[f->x][f->y] == ' ') 
 				break;
 		}
+		setupObstacle(&g);
+		
 	}
 	else {
 		s->t = t->next;
@@ -165,6 +167,20 @@ obstacle* createObstacle(int r, int c, char f, obstacle *next) {
 	obstacle *o = (obstacle*) malloc(sizeof(obstacle));
 	o->h = t;
 	o->next = next;
+}
+
+void setupObstacle(game *g) {
+	int r, c; board *b = g->b;
+	srand(time(0));
+	while(1) {
+		r = (rand() % (10 - 1)) + 1;
+		c = (rand() % (15 - 1)) + 1;
+		// if(b->b[r][c] == ' ' && b->b[r - 1][c + 1] == ' ' && b->b[r][c + 1] == ' '
+		// 	&& b->b[r + 1][c + 1] == ' ' && b->b[r + 1][c] == ' ' && b->b[r + 1][c - 1] == ' '
+		// 	 && b->b[r][c - 1] == ' ' && b->b[r - 1][c - 1] == ' ' && b->b[r - 1][c] == ' ')
+			break;
+	}
+	//g->o = createObstacle(r, c, '+', g->o);
 }
 
 void pauseGame(game *g) {

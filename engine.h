@@ -22,6 +22,11 @@ typedef struct BOARD {
 	char b[100][100];
 } board;
 
+typedef struct OBSTACLE {
+	node *h;
+	struct OBSTACLE *next;
+} obstacle;
+
 typedef struct GAME {
 	snake *s;
 	board *b;
@@ -31,10 +36,6 @@ typedef struct GAME {
 	int score;
 } game;
 
-typedef struct OBSTACLE {
-	node *h;
-	obstacle *next;
-} obstacle;
 
 node* createNode(int r, int c, char f, node *next);
 void initBoard(board *b, int r, int c);
