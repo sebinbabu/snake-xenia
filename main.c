@@ -9,18 +9,20 @@
 int main(void) {
 //	mainMenu();
 	initScreen();
-	int r = 10, c = 15, speed = 250000, key, status = -1;
+	int r = 15, c = 25, speed = 250000, quantum = 10000, key = 0, status = -1;
     board b;
 	snake s;
 	food f;
     game g = {&s, &b, &f};
 
-    initGame(&g, r, c, speed);
+    initGame(&g, r, c, speed, quantum);
+    updateBoard(&g);
+
 	refresh();
 
-	while(1) {
+	while(status != 0 && key != 'q' && key != 'Q') {
 		clear();
-		updateBoard(&g);
+		
 		displayBoard(&g);
 		refresh();
 
@@ -28,17 +30,15 @@ int main(void) {
 			pauseGame(&g);
 		key = getch();
 		status = moveSnake(&g, key);
-
-		if(status == 0 || key == 'q')
-			break;
 	}
 
 	nodelay(stdscr, FALSE);
-	printw("\nGAME OVER\nPress q to Quit"); 
+	printw("\nGAME OVER\nPress 'q' to Quit"); 
 	refresh();
 
 	key = getch();
-	while(key != 'q') key = getch();
+	while(key != 'q' && key != 'Q')
+		key = getch();
 	endwin();
     return 0;
 }

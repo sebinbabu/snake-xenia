@@ -3,8 +3,7 @@
 
 void initScreen() {
 	initscr();
-    //cbreak();
-  	//noecho();
+  	noecho();
   	nodelay(stdscr, TRUE);
   	keypad(stdscr, TRUE);
   	curs_set(0);

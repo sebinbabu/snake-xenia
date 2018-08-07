@@ -5,17 +5,13 @@
 #include "board.h"
 #include "food.h"
 
-void initGame(game *g, int r, int c, int speed) {
+void initGame(game *g, int r, int c, int speed, int quantum) {
 	initSnake(g->s, r, c);
 	initBoard(g->b, r, c);
-	// while(1) {
-	// 	initFood(f, r, c);
-	// 	if(b->b[f->x][f->y] == ' ')
-	// 		break;
-	// }
-	initFood(g->f, r, c);
+	initFood(g->f, (r / 2) - 1, c);
 	g->score = 0;
 	g->speed = speed;
+	g->quantum = quantum;
 	g->o = NULL;
 }
 

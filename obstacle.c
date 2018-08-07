@@ -6,6 +6,7 @@
 #include "board.h"
 #include "game.h"
 
+
 obstacle* createObstacleSquare(int r, int c, char f, obstacle *next) {
 	node *t = createNode(r - 1, c + 1, '+', NULL);
 	t = createNode(r, c + 1, '+', t);
@@ -40,4 +41,14 @@ void setupObstacleSquare(game *g) {
 			break;
 	}
 	g->o = createObstacleSquare(r, c, '+', g->o);
+	pasteObstacle(g->b, g->o);
+}
+
+void pasteObstacle(board *b, obstacle *o) {
+	node *t = o->h;
+	while(t != NULL) {
+		b->b[t->x][t->y] = t->f;
+		t = t->next;
+	}
+	o = o->next;
 }

@@ -4,5 +4,7 @@
 #include "structs.h"
 
 void initFood(food *f, int r, int c);
+void pasteFood(board *b, food *f);
+void setupFood(game *g);
 
 #endif

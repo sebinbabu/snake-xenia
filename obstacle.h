@@ -5,5 +5,6 @@
 
 obstacle* createObstacleSquare(int r, int c, char f, obstacle *next);
 void setupObstacleSquare(game *g);
+void pasteObstacle(board *b, obstacle *o);
 
 #endif

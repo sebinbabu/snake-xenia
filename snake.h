@@ -5,5 +5,6 @@
 
 void initSnake(snake *s, int r, int c);
 int moveSnake(game *g, int m);
+void pasteSnake(board *b, snake *s);
 
 #endif

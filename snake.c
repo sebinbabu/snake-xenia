@@ -44,30 +44,45 @@ int moveSnake(game *g, int m) {
 	ny = (c + (ny % c)) % c;
 
 	if(s->last_x == nx && s->last_y == ny) return -1;	
-	if(b->b[nx][ny] == '#') return 0;
+	if(b->b[nx][ny] == '#' || b->b[nx][ny] == '+') return 0;
 	
 	s->last_x = h->x, s->last_y = h->y;
 	h->f = '#';
-	h->next = createNode(nx, ny, '@', NULL);;
+	h->next = createNode(nx, ny, '@', NULL);
 	s->h = h->next;
+
+	b->b[nx][ny] = '@';
+	b->b[s->last_x][s->last_y] = '#';
+
 	if(nx == f->x && ny == f->y) {
 		
 		g->score++;
 		if(g->speed > 55000) 
-			g->speed -= 10000; 
+			g->speed -= g->quantum; 
 
-		while(1) {
-			initFood(f, r, c);
-			if(b->b[f->x][f->y] == ' ') 
-				break;
+		setupFood(g);
+		if(g->score / 5 > (g->score - 1) / 5) {
+			setupObstacleSquare(g);
+
+			if(g->quantum > 1000)
+				g->quantum -= 3000;
 		}
-		setupObstacleSquare(g);
 		
 	}
 	else {
+		b->b[s->t->x][s->t->y] = ' ';
 		s->t = t->next;
 		s->t->f = 'o';
+		b->b[s->t->x][s->t->y] = 'o';
 		free(t);
 	}
 	return 1;
+}
+
+void pasteSnake(board *b, snake *s) {
+	node *t = s->t;
+	while(t != NULL) {
+		b->b[t->x][t->y] = t->f;
+		t = t->next;
+	}
 }

@@ -17,26 +17,12 @@ void updateBoard(game *g) {
 	board *b = g->b;
 	snake *s = g->s;
 	food *f = g->f;
-	obstacle *o = g->o;
+	//obstacle *o = g->o;
 
 	memset((char*) b->b, ' ', 10000);
 	
-	node *t = s->t;
-	while(t != NULL) {
-		b->b[t->x][t->y] = t->f;
-		t = t->next;
-	}
-
-	while(o != NULL) {
-		t = o->h;
-		while(t != NULL) {
-			b->b[t->x][t->y] = t->f;
-			t = t->next;
-		}
-		o = o->next;
-	}
-
-	b->b[f->x][f->y] = f->f;
+	pasteSnake(b, s);
+	pasteFood(b, f);
 }
 
 void displayBoard(game *g) {
@@ -56,5 +42,5 @@ void displayBoard(game *g) {
 	}
 	for(i = 0; i < b->c + 2; i++) addch('-');
 	addch('\n');
-	printw("SCORE: %d", g->score);
+	printw("SCORE: %d | LEVEL: %d", g->score, (g->score / 5) + 1);
 }

@@ -34,6 +34,7 @@ typedef struct GAME {
 	obstacle *o;
 	int speed;
 	int score;
+	int quantum;
 } game;
 
 #endif
