@@ -26,8 +26,8 @@ typedef struct GAME {
 	snake *s;
 	board *b;
 	food *f;
-	int score;
 	int speed;
+	int score;
 } game;
 
 node* createNode(int r, int c, char f, node *next);

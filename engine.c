@@ -119,8 +119,8 @@ int moveSnake(game *g, int m) {
 	if(nx == f->x && ny == f->y) {
 		
 		g->score++;
-		if(g->speed > 60000 && g->score / 5 > (g->score - 1) / 5) 
-			g->speed -= 50000; 
+		if(g->speed > 60000) 
+			g->speed -= 10000; 
 
 		while(1) {
 			initFood(f, r, c);
