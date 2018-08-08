@@ -1,6 +1,9 @@
 # Snake Xenia
 
-A console classic snake game.
+A classic console snake game.
+
+![Snake Xenia](https://raw.githubusercontent.com/sebinbabu/snake-xenia/master/game.png)
+
 
 ### Prerequisites
 
