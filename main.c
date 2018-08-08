@@ -7,7 +7,6 @@
 
 
 int main(void) {
-//	mainMenu();
 	initScreen();
 	int r = 15, c = 25, speed = 250000, quantum = 10000, key = 0, status = -1;
     board b;
