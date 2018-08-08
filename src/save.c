@@ -11,7 +11,7 @@ savenode createSaveNode(node *n) {
 
 int initSave(game *g) {
 	node del = {-1, -1, -1, NULL}, f = {g->f->x, g->f->y, g->f->f};
-	metasave m = {g->score, g->speed, g->quantum};
+	metasave m = {g->score, g->speed, g->quantum, g->s->last_x, g->s->last_y, g->b->r, g->b->c};
 	savenode sav[100];
 	int i = 0, max = 100;
 	node *t;	
@@ -72,5 +72,10 @@ int initSave(game *g) {
 	}
 	fclose(out);
 	return 1;
+}
+
+int initLoad(game *g) {
+	//TODO : write load code here
+	return 0;
 }
 

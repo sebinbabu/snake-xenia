@@ -7,6 +7,8 @@ typedef struct METASAVE {
 	int score;
 	int speed;
 	int quantum;
+	int last_x, last_y;
+	int r, c;
 } metasave;
 
 typedef struct SAVENODE {
@@ -15,6 +17,7 @@ typedef struct SAVENODE {
 } savenode;
 
 int initSave(game *g);		
+int initLoad(game *g);
 
 savenode createSaveNode(node *n);
 

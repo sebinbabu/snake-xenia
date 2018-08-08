@@ -5,6 +5,7 @@
 #include "board.h"
 #include "save.h"
 #include "food.h"
+#include "obstacle.h"
 
 void initGame(game *g, int r, int c, int speed, int quantum) {
 	initSnake(g->s, r, c);
@@ -22,4 +23,14 @@ void pauseGame(game *g) {
 
 int saveGame(game *g) {
 	return initSave(g);
+}
+
+int loadGame(game *g) {
+	return initLoad(g);
+}
+
+void deleteGame(game *g) {
+	deleteSnake(g->s);
+	deleteObstacle(g->o);
+	deleteBoard(g->b);
 }

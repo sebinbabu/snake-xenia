@@ -44,3 +44,7 @@ void displayBoard(game *g) {
 	addch('\n');
 	printw("SCORE: %d | LEVEL: %d", g->score, (g->score / 5) + 1);
 }
+
+void deleteBoard(board *b) {
+	memset((char*) b->b, ' ', 10000);
+}

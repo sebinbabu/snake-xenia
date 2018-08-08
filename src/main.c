@@ -29,6 +29,7 @@ int main(void) {
 			pauseGame(&g);
 		key = getch();
 		switch(key) {
+			case 'S':
 			case 's':
 						if(saveGame(&g) == 1)
 							printw("\nSave success");
@@ -50,6 +51,7 @@ int main(void) {
 	key = getch();
 	while(key != 'q' && key != 'Q')
 		key = getch();
+	deleteGame(&g);
 	endwin();
     return 0;
 }

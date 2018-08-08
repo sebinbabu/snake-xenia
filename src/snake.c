@@ -86,3 +86,13 @@ void pasteSnake(board *b, snake *s) {
 		t = t->next;
 	}
 }
+
+void deleteSnake(snake *s) {
+	node *t = s->t, *n;
+	while(t != NULL) {
+		n = t->next;
+		free(t);
+		t = n;
+	}
+	s->t = s->h = NULL;
+}

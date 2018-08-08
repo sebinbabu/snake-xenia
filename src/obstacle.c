@@ -52,3 +52,21 @@ void pasteObstacle(board *b, obstacle *o) {
 	}
 	o = o->next;
 }
+
+void deleteObstacle(obstacle *o) {
+	node *t, *n;
+	obstacle *p = o, *no;
+	while(o != NULL) {
+		t = o->h;
+		no = o->next;
+		while(t != NULL) {
+			n = t->next;
+			free(t);
+			t = n;
+		}
+		free(o);
+		o = no;
+	}
+	p->next = NULL;
+	p->h = NULL;
+}
