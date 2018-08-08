@@ -28,7 +28,19 @@ int main(void) {
 		if(status != -1)
 			pauseGame(&g);
 		key = getch();
-		status = moveSnake(&g, key);
+		switch(key) {
+			case 's':
+						if(saveGame(&g) == 1)
+							printw("\nSave success");
+						else
+							printw("\nSave fail");
+						refresh();
+						usleep(speed);
+						break;
+			default: 
+						status = moveSnake(&g, key);
+
+		}
 	}
 
 	nodelay(stdscr, FALSE);

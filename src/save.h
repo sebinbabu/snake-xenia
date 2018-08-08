@@ -14,7 +14,7 @@ typedef struct SAVENODE {
 	char f;
 } savenode;
 
-void initSave(game *g);		
+int initSave(game *g);		
 
 savenode createSaveNode(node *n);
 

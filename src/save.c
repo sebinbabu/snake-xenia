@@ -9,8 +9,8 @@ savenode createSaveNode(node *n) {
 	return s;
 }
 
-void initSave(game *g) {
-	node del = {-1, -1, -1, NULL};
+int initSave(game *g) {
+	node del = {-1, -1, -1, NULL}, f = {g->f->x, g->f->y, g->f->f};
 	metasave m = {g->score, g->speed, g->quantum};
 	savenode sav[100];
 	int i = 0, max = 100;
@@ -18,19 +18,25 @@ void initSave(game *g) {
 	FILE *out;
 
 	out = fopen("SAVEFILE", "wb");
-	if(out == NULL) {
-		printw("ERROR WRITING FILE");
-		return;
+	if(out == NULL)
+		return 0;
+
+	if(fwrite(&m, sizeof(metasave), 1, out) != 1) {
+		fclose(out);
+		return 0;
 	}
 
-	fwrite(&m, sizeof(metasave), 1, out);
+	sav[i++] = createSaveNode(&f);
 
 	t = g->s->t;
 	while(t != NULL) {
 		if(i < max)
 			sav[i++] = createSaveNode(t);
 		else {
-			fwrite(sav, sizeof(metasave), i, out);
+			if(fwrite(sav, sizeof(savenode), i, out) != i) {
+				fclose(out);
+				return 0;
+			}
 			i = 0;
 			sav[i++] = createSaveNode(t);
 		}
@@ -46,14 +52,25 @@ void initSave(game *g) {
 			if(i < max)
 				sav[i++] = createSaveNode(t);
 			else {
-				fwrite(sav, sizeof(metasave), i, out);
+				if(fwrite(sav, sizeof(savenode), i, out) != i) {
+					fclose(out);
+					return 0;
+				}
 				i = 0;
 				sav[i++] = createSaveNode(t);
 			}
 			t = t->next;
 		}
+		sav[i++] = createSaveNode(&del);
+		o = o->next;
 	}
-
-
+	if(i > 0) {
+		if(fwrite(sav, sizeof(savenode), i, out) != i) {
+			fclose(out);
+			return 0;
+		}
+	}
+	fclose(out);
+	return 1;
 }
 

@@ -3,6 +3,7 @@
 #include "game.h"
 #include "snake.h"
 #include "board.h"
+#include "save.h"
 #include "food.h"
 
 void initGame(game *g, int r, int c, int speed, int quantum) {
@@ -17,4 +18,8 @@ void initGame(game *g, int r, int c, int speed, int quantum) {
 
 void pauseGame(game *g) {
 	usleep(g->speed);
+}
+
+int saveGame(game *g) {
+	return initSave(g);
 }
