@@ -5,8 +5,8 @@ A console classic snake game.
 ### Prerequisites
 
 * You need to install the following two packages: 
-* libncurses5-dev : Developer’s libraries for ncurses
-* libncursesw5-dev : Developer’s libraries for ncursesw
+** libncurses5-dev : Developer’s libraries for ncurses
+** libncursesw5-dev : Developer’s libraries for ncursesw
 
 ## Getting Started
 
