@@ -9,6 +9,7 @@ typedef struct METASAVE {
 	int quantum;
 	int last_x, last_y;
 	int r, c;
+	int records;
 } metasave;
 
 typedef struct SAVENODE {
@@ -20,5 +21,6 @@ int initSave(game *g);
 int initLoad(game *g);
 
 savenode createSaveNode(node *n);
+int isDelimiter(savenode *n);
 
 #endif

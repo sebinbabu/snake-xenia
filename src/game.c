@@ -33,4 +33,5 @@ void deleteGame(game *g) {
 	deleteSnake(g->s);
 	deleteObstacle(g->o);
 	deleteBoard(g->b);
+	g->o = NULL;
 }

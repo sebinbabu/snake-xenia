@@ -38,6 +38,16 @@ int main(void) {
 						refresh();
 						usleep(speed);
 						break;
+			case 'L':
+			case 'l':
+						if(loadGame(&g) == 1)
+							printw("\nLoad success");
+						else
+							printw("\nLoad fail");
+						refresh();
+						usleep(speed);
+						updateBoard(&g);
+						break;
 			default: 
 						status = moveSnake(&g, key);
 
