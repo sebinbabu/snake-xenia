@@ -1,24 +1,38 @@
-TARGET = snake
-LIBS = -lncurses -ltinfo
-CC = gcc
-CFLAGS = -g -Wall
+TARGET   = snake
 
-.PHONY: default all clean
+CC       = gcc
+# compiling flags here
+CFLAGS   = -Wall -g
 
-default: $(TARGET)
-all: default
+LINKER   = gcc
+# linking flags here
+LFLAGS   = -Wall -I -lncurses -ltinfo
 
-OBJECTS = $(patsubst %.c, %.o, $(wildcard *.c))
-HEADERS = $(wildcard *.h)
+# change these to proper directories where each file should be
+SRCDIR   = src
+OBJDIR   = obj
+BINDIR   = bin
 
-%.o: %.c $(HEADERS)
-	$(CC) $(CFLAGS) -c $< -o $@
+SOURCES  := $(wildcard $(SRCDIR)/*.c)
+INCLUDES := $(wildcard $(SRCDIR)/*.h)
+OBJECTS  := $(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
+rm       = rm -f
 
-.PRECIOUS: $(TARGET) $(OBJECTS)
 
-$(TARGET): $(OBJECTS)
-	$(CC) $(OBJECTS) -Wall $(LIBS) -o $@
+$(BINDIR)/$(TARGET): $(OBJECTS)
+	@$(LINKER) $(OBJECTS) $(LFLAGS) -o $@
+	@echo "link complete"
 
+$(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.c
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@echo "compiled "$<" successfully"
+
+.PHONY: clean
 clean:
-	-rm -f *.o
-	-rm -f $(TARGET)
+	@$(rm) $(OBJECTS)
+	@echo "cleaned"
+
+.PHONY: remove
+remove: clean
+	@$(rm) $(BINDIR)/$(TARGET)
+	@echo "removed"
