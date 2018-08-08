@@ -16,7 +16,7 @@ These instructions will get you a copy of the project up and running on your loc
 git clone https://github.com/sebinbabu/snake-xenia.git
 cd snake-xenia
 make
-./snake
+./bin/snake
 ```
 
 ## Authors
