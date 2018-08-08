@@ -18,6 +18,9 @@ cd snake-xenia
 make
 ./bin/snake
 ```
+## Usage
+
+Start the excecutable. Use the UP, DOWN, LEFT and RIGHT arrow keys to control the snake. Press the 's' key to save state. Press the 'l' key to load state. Press 'q' to quit.
 
 ## Authors
 
