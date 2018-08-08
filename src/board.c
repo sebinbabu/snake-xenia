@@ -17,12 +17,16 @@ void updateBoard(game *g) {
 	board *b = g->b;
 	snake *s = g->s;
 	food *f = g->f;
-	//obstacle *o = g->o;
+	obstacle *o = g->o;
 
 	memset((char*) b->b, ' ', 10000);
 	
 	pasteSnake(b, s);
 	pasteFood(b, f);
+	while(o != NULL) {
+		pasteObstacle(g->b, o);
+		o = o->next;
+	}
 }
 
 void displayBoard(game *g) {

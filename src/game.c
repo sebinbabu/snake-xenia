@@ -26,7 +26,10 @@ int saveGame(game *g) {
 }
 
 int loadGame(game *g) {
-	return initLoad(g);
+	deleteGame(g);
+	int o = initLoad(g);
+	updateBoard(g);
+	return o;
 }
 
 void deleteGame(game *g) {

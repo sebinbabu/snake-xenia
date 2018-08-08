@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <ncurses.h>
+#include <malloc.h>
 
 #include "save.h"
 #include "structs.h"
 #include "node.h"
+#include "obstacle.h"
 
 savenode createSaveNode(node *n) {
 	savenode s = {n->x, n->y, n->f};
@@ -93,11 +95,10 @@ int initSave(game *g) {
 }
 
 int initLoad(game *g) {
-	// deleteGame(g);
 	metasave m;
 	int i = 0;
-//	long int size;
 	node *t;
+	obstacle *o = NULL, *tmp;
 	FILE *in;
 	in = fopen("SAVEFILE", "rb");
 
@@ -123,10 +124,10 @@ int initLoad(game *g) {
 	g->f->y = s[0].y;
 	g->f->f = s[0].f;
     
-    i = 1;
+    i = 2;
     t = createNode(s[1].x, s[1].y, s[1].f, NULL);
     g->s->t = t;
-	while(!isDelemiter(s + i) && i < m.records) {
+	while(i < m.records && !isDelemiter(s + i)) {
 	    t->next = createNode(s[i].x, s[i].y, s[i].f, NULL);
 	    t = t->next;
 	    i++;
@@ -137,6 +138,24 @@ int initLoad(game *g) {
 
 	g->b->r = m.r;
 	g->b->c = m.c;
+
+	if(isDelemiter(s + i)) i++;
+
+	while(i < m.records) {
+		tmp = (obstacle*) malloc(sizeof(obstacle));
+		tmp->next = o;
+		t = createNode(s[i].x, s[i].y, s[i].f, NULL);
+		tmp->h = t;
+		i++;
+		while(i < m.records && !isDelemiter(s + i)) {
+	    	t->next = createNode(s[i].x, s[i].y, s[i].f, NULL);
+	    	t = t->next;
+	    	i++;
+		}
+		i++;
+		o = tmp;
+	}
+	g->o = o;
 
 	return 1;
 }

@@ -46,7 +46,6 @@ int main(void) {
 							printw("\nLoad fail");
 						refresh();
 						usleep(speed);
-						updateBoard(&g);
 						break;
 			default: 
 						status = moveSnake(&g, key);
