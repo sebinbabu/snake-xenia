@@ -17,6 +17,7 @@ SOURCES  := $(wildcard $(SRCDIR)/*.c)
 INCLUDES := $(wildcard $(SRCDIR)/*.h)
 OBJECTS  := $(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 rm       = rm -f
+mkdir	 = mkdir -p $(OBJDIR)
 
 
 $(BINDIR)/$(TARGET): $(OBJECTS)
@@ -24,6 +25,7 @@ $(BINDIR)/$(TARGET): $(OBJECTS)
 	@echo "link complete"
 
 $(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.c
+	@$(mkdir)
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@echo "compiled "$<" successfully"
 
