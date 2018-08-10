@@ -32,9 +32,11 @@ $(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.c
 .PHONY: clean
 clean:
 	@$(rm) $(OBJECTS)
+	@$(rm) -r $(OBJDIR)
 	@echo "cleaned"
 
 .PHONY: remove
 remove: clean
 	@$(rm) $(BINDIR)/$(TARGET)
+	@$(rm) -r $(OBJDIR)
 	@echo "removed"
