@@ -6,7 +6,7 @@ CFLAGS   = -Wall -g
 
 LINKER   = gcc
 # linking flags here
-LFLAGS   = -Wall -lcurl
+LFLAGS   = -Wall -lncurses -ltinfo
 
 # change these to proper directories where each file should be
 SRCDIR   = src
